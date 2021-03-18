@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { IArticle } from "../types";
+import { Button } from "@material-ui/core";
 
-interface match {
-  match: {
-    params: {
-      id: string;
-    };
-  };
+interface Iparams {
+  id: string;
 }
 
-class Article extends Component<RouteComponentProps & match> {
+interface State {
+  article: IArticle;
+}
+
+class Article extends Component<RouteComponentProps<Iparams>, State> {
   state = {
-    post: {
+    article: {
       title: "loading...",
       body: "loading...",
-    },
+    } as IArticle,
   };
 
   componentDidMount() {
@@ -23,20 +26,23 @@ class Article extends Component<RouteComponentProps & match> {
 
     axios
       .get("https://jsonplaceholder.typicode.com/posts/" + postId)
-      .then((data) => {
-        console.log(data);
-        this.setState({ post: data.data });
+      .then(({ data }: { data: IArticle }) => {
+        this.setState({ article: data });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }
 
   render() {
     return (
       <>
-        <h2>Article Detail</h2>
+        <h2>Article</h2>
         <div>
-          <h3>{this.state.post.title}</h3>
-          <p>{this.state.post.body}</p>
+          <h3>{this.state.article.title}</h3>
+          <p>{this.state.article.body}</p>
         </div>
+        <Link to="/">Back</Link>
       </>
     );
   }
