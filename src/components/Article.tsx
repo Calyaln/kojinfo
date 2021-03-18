@@ -1,32 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { RouteComponentProps } from "react-router-dom";
-//import { Props, State } from "react-router";
-
-// interface RouteParams {
-//   id: string;
-//   params: string;
-// }
-
-//class Article extends React.Component<MyProps & RouteComponentProps, MyState> {
-// class Article extends React.Component<RouteComponentProps<RouteParams>> {
-//   state = {
-//     post: [] || null,
-//   };
-
-// interface State {
-//   title: string;
-//   body: string;
-// }
-
-// interface Props {
-//   post: [];
-// }
-
-// class Article extends React.Component<RouteComponentProps<any>> {
-//     state = {
-//       post: null,
-//     };
 
 interface match {
   match: {
@@ -35,11 +9,6 @@ interface match {
     };
   };
 }
-
-// class Article extends React.Component<Props, State> {
-//   state: State = {
-//     post: null,
-//   };
 
 class Article extends Component<RouteComponentProps & match> {
   state = {
@@ -51,7 +20,6 @@ class Article extends Component<RouteComponentProps & match> {
 
   componentDidMount() {
     const postId = this.props.match.params.id;
-    //(this.props.match.params as any).id
 
     axios
       .get("https://jsonplaceholder.typicode.com/posts/" + postId)
