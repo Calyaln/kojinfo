@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { RouteComponentProps } from "react-router";
+import { RouteComponentProps } from "react-router-dom";
 //import { Props, State } from "react-router";
 
 // interface RouteParams {
@@ -28,9 +28,25 @@ import { RouteComponentProps } from "react-router";
 //       post: null,
 //     };
 
-class Article extends React.Component<Props, State> {
-  state: State = {
-    post: null,
+interface match {
+  match: {
+    params: {
+      id: string;
+    };
+  };
+}
+
+// class Article extends React.Component<Props, State> {
+//   state: State = {
+//     post: null,
+//   };
+
+class Article extends Component<RouteComponentProps & match> {
+  state = {
+    post: {
+      title: "loading...",
+      body: "loading...",
+    },
   };
 
   componentDidMount() {
@@ -38,7 +54,7 @@ class Article extends React.Component<Props, State> {
     //(this.props.match.params as any).id
 
     axios
-      .get("https://jsonplaceholder.typicode.com/posts" + postId)
+      .get("https://jsonplaceholder.typicode.com/posts/" + postId)
       .then((data) => {
         console.log(data);
         this.setState({ post: data.data });
