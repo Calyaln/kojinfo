@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { IArticle } from "../types";
 
+// the article types structure
 type ArticlesState = {
   articles: IArticle[];
 };
@@ -27,12 +28,12 @@ class Articles extends React.Component<ArticlesState> {
   render() {
     return (
       <>
-        <h1>Articles</h1>
+        <h1 style={{ color: "#32CD32", paddingBottom: "10px" }}>Articles</h1>
         {this.state.articles.map((article: IArticle) => (
-          <div key={article.id}>
+          <div style={{ padding: "2px" }} key={article.id}>
             <h3>
               <Link
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "#2F4F4F" }}
                 to={`/posts/${article.id}`}
               >
                 {article.title}

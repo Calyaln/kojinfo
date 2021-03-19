@@ -36,12 +36,25 @@ class Article extends Component<RouteComponentProps<Iparams>, State> {
   render() {
     return (
       <>
-        <h2>Article</h2>
+        <h2 style={{ color: "#32CD32", paddingBottom: "10px" }}>Article</h2>
         <div>
-          <h3>{this.state.article.title}</h3>
+          <h3 style={{ color: "#2F4F4F" }}>{this.state.article.title}</h3>
           <p>{this.state.article.body}</p>
         </div>
-        <Link to="/">Back</Link>
+        <Link
+          style={{
+            padding: "5px",
+            textDecoration: "none",
+            backgroundColor: "#32CD32",
+            borderRadius: "3px",
+            color: "white",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+          to="/"
+        >
+          Back
+        </Link>
       </>
     );
   }
